@@ -16,6 +16,7 @@ public class Usuario {
     @Column(name = "idUsuario")
     private Integer id;
 
+    @Column
     private String nombre;
     private String email;
     private String password;

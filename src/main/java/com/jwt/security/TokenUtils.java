@@ -13,7 +13,7 @@ import java.util.*;
 
 public class TokenUtils {
 
-    private final static String ACCESS_TOKEN_SECRET = "aquiPuedeIrLoQueTeDeLaGana123456";
+    private static final String SECRET_KEY ="586E3272357538782F413F4428472B4B6250655368566B597033733676397924";
     private final static Long ACCESS_TOKEN_VALIDITY_SECONDS = 2_592_00L;
 
 
@@ -28,14 +28,14 @@ public class TokenUtils {
                 .setSubject(email)
                 .setExpiration(expirationDate)
                 .addClaims(extra)
-                .signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes()))
+                .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()))
                 .compact();
     }
 
     public static UsernamePasswordAuthenticationToken getAutehntication (String token) {
         try {
             Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(ACCESS_TOKEN_SECRET.getBytes())
+                    .setSigningKey(SECRET_KEY.getBytes())
                     .build()
                     .parseClaimsJws(token)
                     .getBody();

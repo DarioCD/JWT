@@ -2,6 +2,7 @@ package com.jwt.controller;
 
 import com.jwt.entity.Usuario;
 import com.jwt.service.UsuarioService;
+import io.jsonwebtoken.Claims;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,9 @@ public class UsuarioController {
         return usuarioService.registerUsuario(usuario);
     }
 
-    @GetMapping()
-    public String prueba (@RequestParam (value = "texto") String texto) {
-        return texto;
+
+    @GetMapping("/usuario")
+    public Claims getUsuarioToken (@RequestParam (value = "token") String token) {
+        return usuarioService.obtenerClaimsDesdeToken(token);
     }
 }
